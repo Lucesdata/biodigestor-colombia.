@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Rentabilidad de una planta de biogás de 30.000 t/año en Colombia, explicada para inversionistas.">
+<meta property="og:title" content="¿Es buen negocio convertir restos de comida en electricidad?">
+<meta property="og:image" content="img/hero.webp">
+<link rel="preload" as="image" href="img/hero.webp">
+<title>¿Es buen negocio convertir restos de comida en electricidad?</title>
+<style>
+@font-face{font-family:'Bricolage';src:url(fonts/bricolage-grotesque-latin-500-normal.woff2) format('woff2');font-weight:500;font-display:swap}@font-face{font-family:'Bricolage';src:url(fonts/bricolage-grotesque-latin-600-normal.woff2) format('woff2');font-weight:600;font-display:swap}@font-face{font-family:'Bricolage';src:url(fonts/bricolage-grotesque-latin-700-normal.woff2) format('woff2');font-weight:700;font-display:swap}@font-face{font-family:'Bricolage';src:url(fonts/bricolage-grotesque-latin-800-normal.woff2) format('woff2');font-weight:800;font-display:swap}@font-face{font-family:'Literata';src:url(fonts/literata-latin-400-normal.woff2) format('woff2');font-weight:400;font-display:swap}@font-face{font-family:'Literata';src:url(fonts/literata-latin-700-normal.woff2) format('woff2');font-weight:700;font-display:swap}
+:root{
+  --paper:#F5F7F2; --white:#FFFFFF; --ink:#1E2520; --ink2:#4E5B53; --ink3:#8A968E; --line:#DCE3DB;
+  --leaf:#2F7A3A; --leaf-bg:#DDEFD9; --loss:#A3303D; --loss-bg:#F6DEE1; --sun:#C98A0B; --sun-bg:#FAEFD3;
+  --display:"Bricolage",system-ui,sans-serif; --body:"Literata",Georgia,serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scrollbar-color:#B9C4BC var(--paper)}
+::selection{background:var(--sun-bg);color:var(--ink)}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.65 var(--body);caret-color:var(--leaf);font-variant-numeric:tabular-nums lining-nums}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.08;letter-spacing:-.02em;text-wrap:balance}
+h1{font-size:clamp(36px,5.4vw,64px);font-weight:800}
+h2{font-size:clamp(26px,3vw,34px);font-weight:700;margin:0 0 10px}
+h3{font-size:18px;font-weight:700}
+p{margin:0 0 12px;max-width:68ch}
+:focus-visible{outline:3px solid var(--sun);outline-offset:3px;border-radius:4px}
+.d{font-family:var(--display);font-weight:700}
+.pos{color:var(--leaf)} .neg{color:var(--loss)}
+.muted{color:var(--ink2)}
+
+/* Hero */
+.hero{max-width:1200px;margin:0 auto;padding:56px 28px 48px;display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center}
+.hero h1{max-width:12ch}
+.lede{font-size:19px;color:var(--ink2);margin-top:20px;max-width:46ch}
+.verdict{display:flex;gap:14px;align-items:flex-start;margin-top:30px;max-width:52ch}
+.verdict svg{flex:0 0 34px;margin-top:2px}
+.verdict b{display:block;font-family:var(--display);font-size:21px;line-height:1.25}
+.verdict span{color:var(--ink2);font-size:16px}
+
+/* El recibo: el único gesto decorativo de la página */
+.receipt{background:var(--white);padding:26px 28px 40px;box-shadow:0 2px 3px rgba(30,37,32,.06),0 24px 48px -28px rgba(30,37,32,.4);
+  --z:9px;-webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/calc(2*var(--z)) 100%;mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/calc(2*var(--z)) 100%;}
+@media (prefers-reduced-motion:reduce){.receipt{animation:none}html{scroll-behavior:auto}}
+.receipt h3{font-size:19px;margin-bottom:2px}
+.receipt .sub{font-size:14px;color:var(--ink2);margin-bottom:16px}
+.rl{display:flex;justify-content:space-between;gap:16px;font-size:15.5px;padding:4px 0}
+.rl span:last-child{font-family:var(--display);font-weight:600;white-space:nowrap}
+.cut{border:0;border-top:1.5px dashed var(--line);margin:12px 0}
+.rt{display:flex;justify-content:space-between;align-items:baseline}
+.rt span:first-child{font-family:var(--display);font-weight:700}
+.rt span:last-child{font-family:var(--display);font-weight:800;font-size:32px;white-space:nowrap}
+.rn{font-size:14px;color:var(--ink2);margin:14px 0 0;line-height:1.5}
+
+/* Cuerpo */
+.wrap{max-width:1200px;margin:0 auto;padding:0 28px 56px;display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:64px}
+.story{min-width:0;max-width:720px}
+.story section{padding:48px 0 8px}
+.story section+section{border-top:1px solid var(--line)}
+
+/* Proceso */
+.process svg{width:100%;height:auto;display:block;margin:12px 0 18px}
+.share{display:grid;grid-template-columns:minmax(140px,190px) 1fr auto;gap:6px 16px;align-items:center;font-size:15.5px}
+.share .bar{height:10px;background:var(--line);border-radius:99px;overflow:hidden}
+.share .bar i{display:block;height:100%;background:var(--sun);border-radius:99px;transition:width .4s cubic-bezier(.16,1,.3,1)}
+.share{grid-auto-flow:dense}.share .bar{grid-column:2}.share .v{grid-column:3;font-family:var(--display);font-weight:600;text-align:right;white-space:nowrap}
+
+/* Costos */
+.stack{display:flex;height:14px;border-radius:99px;overflow:hidden;margin:16px 0 10px}
+.stack i{display:block;height:100%}
+.keys{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:14px;color:var(--ink2)}
+.keys b{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+
+/* Tres preguntas */
+.m{display:grid;grid-template-columns:190px 1fr;gap:20px;padding:22px 0}
+.m+.m{border-top:1px dashed var(--line)}
+@media(max-width:620px){.m{grid-template-columns:1fr;gap:4px}}
+.m .big{font-family:var(--display);font-weight:800;font-size:40px;line-height:1;white-space:nowrap}
+.m .big.sm{font-size:30px}
+.m h3{margin-bottom:4px}
+.m p{font-size:16px;margin:0}
+.gauge{position:relative;height:10px;background:var(--line);border-radius:99px;margin:12px 0 4px}
+.gauge i{position:absolute;left:0;top:0;bottom:0;border-radius:99px;transition:width .4s cubic-bezier(.16,1,.3,1)}
+.gauge u{position:absolute;top:-5px;bottom:-5px;width:3px;background:var(--ink);border-radius:2px}
+.gl{display:flex;justify-content:space-between;font-size:12.5px;color:var(--ink3)}
+
+.chart svg{width:100%;height:auto;display:block;margin-top:8px}
+.chart text{font-family:var(--display)}
+
+/* Umbrales */
+.need{margin:8px 0 0;padding:0;list-style:none}
+.need li{display:grid;grid-template-columns:1fr auto;gap:2px 16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.need li:last-child{border-bottom:0}
+.need .d{font-size:22px;white-space:nowrap}
+.need small{grid-column:1/-1;color:var(--ink2);font-size:14.5px}
+
+details{margin:14px 0 0}
+details summary{cursor:pointer;font-family:var(--display);font-weight:600;color:var(--leaf);padding:6px 0}
+table.sens{border-collapse:separate;border-spacing:4px;width:100%;margin-top:8px}
+.sens th{font-family:var(--display);font-weight:600;font-size:13px;color:var(--ink2);padding:4px}
+.sens td{text-align:center;padding:9px 4px;border-radius:6px;font-family:var(--display);font-weight:700;font-size:14.5px}
+.sens .g{background:var(--leaf-bg);color:#1E5527} .sens .y{background:var(--sun-bg);color:#6B4A05} .sens .r{background:var(--loss-bg);color:#7A1F2A}
+.sens .now{box-shadow:inset 0 0 0 2.5px var(--ink)}
+
+.risks{margin:6px 0 0;padding:0;list-style:none}
+.risks li{padding:10px 0;font-size:16px}
+.risks b{font-family:var(--display)}
+dl{display:grid;grid-template-columns:150px 1fr;gap:8px 18px;margin:10px 0 0;font-size:15.5px}
+dt{font-family:var(--display);font-weight:700} dd{margin:0;color:var(--ink2)}
+@media(max-width:620px){dl{grid-template-columns:1fr;gap:0}dd{margin-bottom:10px}}
+
+/* Simulador */
+.panel{position:sticky;top:16px;align-self:start;background:var(--ink);color:#E9EEE8;border-radius:16px;padding:22px;max-height:calc(100vh - 32px);overflow:auto;min-width:0;scrollbar-color:#4A564E var(--ink)}
+.panel h2{font-size:22px;color:#fff;margin-bottom:4px}
+.panel p{font-size:14px;color:#A9B6AD;line-height:1.5}
+.scen{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:14px 0 20px}
+.scen button{font:600 14px var(--display);background:none;color:#E9EEE8;border:1.5px solid #45524A;border-radius:9px;padding:9px 2px;cursor:pointer;transition:background .2s,color .2s}
+.scen button:hover{border-color:#8A968E}
+.scen button[aria-pressed=true]{background:#E9EEE8;color:var(--ink);border-color:#E9EEE8}
+.ctl{margin-bottom:18px}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:14.5px;line-height:1.35}
+.ctl label b{font-family:var(--display);color:#fff;white-space:nowrap}
+input[type=range]{width:100%;margin:8px 0 0;accent-color:var(--sun)}
+.out{display:grid;grid-template-columns:1fr 1fr;gap:12px;border-top:1px solid #39443D;padding-top:14px}
+.out div{font-size:12.5px;color:#A9B6AD}
+.out b{display:block;font:700 23px var(--display);color:#fff;margin-top:2px}
+.out b.pos{color:#9ED69A} .out b.neg{color:#F0959F}
+.panel details summary{color:#E9EEE8;font-size:14.5px}
+.sw{display:flex;gap:10px;font-size:13.5px;margin:10px 0;line-height:1.35;color:#C9D2CB}
+.sw input{accent-color:var(--sun);width:17px;height:17px;flex:none}
+.f{display:grid;grid-template-columns:1fr 96px;gap:8px;align-items:center;margin:7px 0;font-size:13px;color:#C9D2CB;line-height:1.3}
+.f input{width:100%;background:#2A332D;border:1px solid #45524A;color:#fff;border-radius:6px;padding:5px 7px;font:inherit;text-align:right}
+.reset{margin-top:14px;width:100%;font:600 14px var(--display);background:none;border:1.5px solid #45524A;color:#E9EEE8;border-radius:9px;padding:9px;cursor:pointer}
+.reset:hover{border-color:#8A968E}
+
+
+/* Banner fotográfico */
+.banner{position:relative;height:clamp(440px,64vh,640px);overflow:hidden;background:#24302a}
+.banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 55%}
+.banner .scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(16,22,18,.86) 0%,rgba(16,22,18,.62) 38%,rgba(16,22,18,0) 72%),linear-gradient(0deg,rgba(16,22,18,.55),rgba(16,22,18,0) 45%)}
+.banner .copy{position:relative;max-width:1200px;margin:0 auto;height:100%;padding:0 28px 120px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff}
+.banner h1{max-width:14ch;color:#fff}
+.banner .lede{color:#E3EAE4;margin-top:18px;max-width:44ch}
+.hero{padding-top:0;align-items:start}
+.hero .receipt{margin-top:-150px;position:relative;z-index:2}
+.hero .left{padding-top:34px}
+.hero .left p{font-size:15.5px;color:var(--ink2)}
+@media(max-width:980px){.banner .copy{padding-bottom:48px}.hero .receipt{margin-top:0}.banner .scrim{background:linear-gradient(0deg,rgba(16,22,18,.88) 10%,rgba(16,22,18,.35) 70%,rgba(16,22,18,.15))}}
+
+/* Recorrido del residuo: secuencia real, por eso va numerada */
+.steps{max-width:1200px;margin:0 auto;padding:56px 28px 8px}
+.steps h2{margin-bottom:6px}
+.steps>p{color:var(--ink2)}
+.track{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px;margin-top:26px;list-style:none;padding:0}
+.track::before{content:"";position:absolute;left:0;right:0;top:calc(var(--imgh) + 22px);height:3px;background:var(--line);border-radius:3px}
+.track::after{content:"";position:absolute;left:0;top:calc(var(--imgh) + 22px);height:3px;width:var(--prog,0%);background:var(--leaf);border-radius:3px;transition:width 1.6s cubic-bezier(.16,1,.3,1)}
+.track{--imgh:clamp(120px,13vw,170px)}
+.step figure{margin:0}
+.step .ph{height:var(--imgh);border-radius:12px;overflow:hidden;background:#2a332d}
+.step img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.06);transition:transform 1.2s cubic-bezier(.16,1,.3,1)}
+.step .dot{position:relative;z-index:1;width:26px;height:26px;border-radius:50%;background:var(--paper);border:3px solid var(--line);margin:9px 0 10px;display:grid;place-items:center;font:700 12px var(--display);color:var(--ink3);transition:border-color .4s,background .4s,color .4s}
+.step h3{font-size:16.5px}
+.step .val{font:700 19px var(--display);color:var(--ink);margin-top:2px;white-space:nowrap}
+.step small{display:block;color:var(--ink2);font-size:13.5px;line-height:1.45;margin-top:2px}
+.js .step{opacity:.25;transform:translateY(10px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.step.on{opacity:1!important;transform:none!important}
+.step.on img{transform:scale(1)}
+.step.on .dot{border-color:var(--leaf);background:var(--leaf);color:#fff}
+@media(max-width:820px){.track{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:62%;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}.step{scroll-snap-align:start}.track::before,.track::after{display:none}}
+@media (prefers-reduced-motion:reduce){.js .step{opacity:1;transform:none}.step img{transform:none}}
+
+/* Lo que sobra */
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}
+.pair figure{margin:0}
+.pair img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;display:block}
+.pair figcaption{font-size:15px;color:var(--ink2);margin-top:8px;line-height:1.45}
+.pair figcaption b{color:var(--ink);font-family:var(--display)}
+@media(max-width:560px){.pair{grid-template-columns:1fr}}
+
+/* Acelerar el retorno */
+.boost{display:grid;grid-template-columns:1fr 150px;gap:22px;align-items:start}
+.boost img{width:150px;height:150px;object-fit:cover;border-radius:50%}
+@media(max-width:560px){.boost{grid-template-columns:1fr}.boost img{display:none}}
+.chips{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+@media(max-width:560px){.chips{grid-template-columns:1fr}}
+.chip{display:block;text-align:left;font:inherit;background:var(--white);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px 12px 44px;cursor:pointer;position:relative;color:var(--ink);transition:border-color .2s,background .2s}
+.chip:hover{border-color:#B9C4BC}
+.chip::before{content:"";position:absolute;left:14px;top:15px;width:18px;height:18px;border-radius:5px;border:2px solid #B9C4BC;background:#fff;transition:all .2s}
+.chip[aria-pressed=true]{border-color:var(--leaf);background:#F0F7EE}
+.chip[aria-pressed=true]::before{background:var(--leaf) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M4 9.5l3 3 7-7' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat;border-color:var(--leaf)}
+.chip b{display:block;font:700 15.5px var(--display)}
+.chip span{display:block;font-size:13.5px;color:var(--ink2);line-height:1.4;margin-top:2px}
+.gain{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:18px;background:var(--white);border-radius:14px;padding:16px 18px}
+.gain div{font-size:13.5px;color:var(--ink2)}
+.gain b{display:block;font:800 26px var(--display);color:var(--ink);margin-top:2px}
+.gain s{color:var(--ink3);font:600 15px var(--display);margin-left:6px}
+.note{font-size:13.5px;color:var(--ink3);margin-top:10px}
+
+footer{max-width:1200px;margin:0 auto;padding:24px 28px 48px;border-top:1px solid var(--line);font-size:13.5px;color:var(--ink2)}
+footer p{max-width:100ch}
+
+@media(max-width:980px){
+  .hero{grid-template-columns:1fr;gap:36px;padding-top:36px}
+  .wrap{grid-template-columns:minmax(0,1fr);gap:0}
+  .panel{position:relative;top:0;max-height:none;order:-1;margin-bottom:8px}
+}
+@media(max-width:600px){.hero,.wrap,footer{padding-left:18px;padding-right:18px}.panel{padding:18px 16px}.share{grid-template-columns:1fr auto}.share .bar{grid-column:1/-1;margin-bottom:6px}.share .v{grid-column:2}}
+</style>
+</head>
+<body>
+
+<div class="banner">
+  <img src="img/hero.webp" alt="Planta de biogás con dos digestores verdes al atardecer, rodeada de vegetación">
+  <div class="scrim"></div>
+  <div class="copy">
+    <h1>¿Es buen negocio convertir restos de comida en electricidad?</h1>
+    <p class="lede">Una planta de biogás para 30.000 toneladas al año en Colombia, explicada en cinco minutos.</p>
+  </div>
+</div>
+<header class="hero">
+  <div class="left">
+    <div class="verdict" id="verdict" aria-live="polite"></div>
+    <p style="margin-top:22px">Mueve los supuestos en el simulador y toda la página se recalcula.</p>
+  </div>
+  <div class="receipt" role="region" aria-label="Cuenta de una tonelada">
+    <h3>La cuenta de una tonelada</h3>
+    <div class="sub">Lo que deja cada tonelada en el primer año</div>
+    <div id="r-in"></div>
+    <hr class="cut">
+    <div class="rl"><span>Costos de operación</span><span class="neg" id="r-out"></span></div>
+    <hr class="cut">
+    <div class="rt"><span>Queda</span><span id="r-net"></span></div>
+    <p class="rn" id="r-note"></p>
+  </div>
+</header>
+
+<section class="steps" aria-labelledby="h-steps">
+  <h2 id="h-steps">Del residuo a la red, en cinco pasos</h2>
+  <p>Los restos de comida se descomponen en un tanque cerrado y sueltan biogás, que un motor convierte en electricidad.</p>
+  <ol class="track" id="track">
+    <li class="step"><figure><div class="ph"><img src="img/residuo.webp" alt="Restos de frutas y verduras"></div></figure><div class="dot">1</div><h3>Llega el residuo</h3><div class="val" id="st1"></div><small>Plazas de mercado, supermercados y restaurantes.</small></li>
+    <li class="step"><figure><div class="ph"><img src="img/digestor.webp" alt="Corte de un biodigestor con burbujas de gas"></div></figure><div class="dot">2</div><h3>Se digiere</h3><div class="val" id="st2"></div><small>Bacterias lo descomponen sin oxígeno durante unas semanas.</small></li>
+    <li class="step"><figure><div class="ph"><img src="img/gas.webp" alt="Llama azul de biogás"></div></figure><div class="dot">3</div><h3>Sale el biogás</h3><div class="val" id="st3"></div><small>Gas combustible, en su mayor parte metano.</small></li>
+    <li class="step"><figure><div class="ph"><img src="img/motor.webp" alt="Motor generador verde"></div></figure><div class="dot">4</div><h3>Un motor lo quema</h3><div class="val" id="st4"></div><small>Produce electricidad y calor a la vez.</small></li>
+    <li class="step"><figure><div class="ph"><img src="img/red.webp" alt="Torre eléctrica al atardecer"></div></figure><div class="dot">5</div><h3>Se vende a la red</h3><div class="val" id="st5"></div><small id="st5s"></small></li>
+  </ol>
+</section>
+
+<div class="wrap">
+<main class="story">
+
+  <section>
+    <h2>De dónde viene el dinero</h2>
+    <p class="muted">Cuatro ingresos. Los dos primeros sostienen el negocio.</p>
+    <div class="share" id="share"></div>
+    <div class="pair">
+      <figure><img src="img/abono.webp" alt="Brote verde creciendo en tierra fértil" loading="lazy"><figcaption id="cap-abono"></figcaption></figure>
+      <figure><img src="img/agua.webp" alt="Canal de agua tratada" loading="lazy"><figcaption><b>El líquido se trata.</b> La fracción líquida del digestato se trata y se reutiliza en riego. Es un costo, no un ingreso.</figcaption></figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>Lo que cuesta</h2>
+    <p id="cost"></p>
+    <div class="stack" id="stack" aria-hidden="true"></div>
+    <div class="keys" id="keys"></div>
+  </section>
+
+  <section>
+    <h2>¿Es rentable?</h2>
+    <div class="m">
+      <div class="big" id="m-pb"></div>
+      <div><h3>¿Cuándo recupero lo invertido?</h3><p id="t-pb"></p>
+        <div class="gauge" aria-hidden="true"><i id="g-pb"></i><u style="left:50%"></u></div>
+        <div class="gl"><span>0</span><span>10 años, plazo habitual</span><span>20</span></div></div>
+    </div>
+    <div class="m">
+      <div class="big" id="m-irr"></div>
+      <div><h3>¿Qué interés me paga? (TIR)</h3><p id="t-irr"></p>
+        <div class="gauge" aria-hidden="true"><i id="g-irr"></i><u id="g-w"></u></div>
+        <div class="gl"><span>0 %</span><span id="g-wl"></span><span>25 %</span></div></div>
+    </div>
+    <div class="m">
+      <div class="big sm" id="m-npv"></div>
+      <div><h3>¿Gano más que en otra inversión? (VAN)</h3><p id="t-npv"></p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>El dinero año a año</h2>
+    <p class="muted">Se invierte todo al principio y se recupera poco a poco con lo que deja la operación.</p>
+    <div class="chart" id="chart"></div>
+  </section>
+
+  <section>
+    <h2>Qué tendría que cambiar</h2>
+    <p class="muted">El mínimo de cada variable para que el proyecto supere la rentabilidad exigida, dejando lo demás igual.</p>
+    <ul class="need" id="need"></ul>
+    <details>
+      <summary>Ver la tabla de combinaciones</summary>
+      <p class="muted" style="font-size:14.5px;margin-top:6px">Rentabilidad anual según el cobro por tonelada (filas) y el precio de la electricidad (columnas). Verde: supera tu exigencia. Ámbar: gana, pero menos. Rojo: pierde. El recuadro marca tu escenario.</p>
+      <div id="sens"></div>
+    </details>
+  </section>
+
+  <section>
+    <div class="boost">
+      <div>
+        <h2>Cómo acelerar el retorno</h2>
+        <p class="muted">Mezclar con la comida una parte de residuos que dan más gas y cuyo generador paga por entregarlos. Elige cuáles sumar:</p>
+      </div>
+      <img src="img/luz.webp" alt="Bombilla encendida entre hojas" loading="lazy">
+    </div>
+    <div class="chips" id="chips"></div>
+    <div class="gain" aria-live="polite">
+      <div>Recuperación<b id="g-pb2"></b></div>
+      <div>Rentabilidad anual<b id="g-irr2"></b></div>
+    </div>
+    <p class="note">Antes de construir hay que confirmar la mezcla con un ensayo de laboratorio. Más gas exige un motor algo mayor, costo que este cálculo no incluye.</p>
+  </section>
+
+  <section>
+    <h2>Riesgos principales</h2>
+    <ul class="risks">
+      <li><b>Cobro por recibir el residuo.</b> Es lo que más pesa: hay que firmarlo con el municipio u operador de aseo antes de construir.</li>
+      <li><b>Precio de la electricidad.</b> En 2026 la bolsa pasó de unos 100 a más de 900 pesos por kWh. Un contrato a precio fijo da estabilidad.</li>
+      <li><b>Suministro de residuo.</b> Sin residuo no hay gas: se necesitan contratos de largo plazo con mercados, supermercados e industria.</li>
+      <li><b>Costo de la planta.</b> Se controla con cotizaciones firmes y un contrato llave en mano.</li>
+    </ul>
+    <details>
+      <summary>Glosario</summary>
+      <dl>
+        <dt>Biodigestor</dt><dd>Tanque cerrado donde bacterias descomponen el residuo sin oxígeno y producen biogás.</dd>
+        <dt>Tarifa de recepción</dt><dd>Lo que se cobra por recibir cada tonelada que de otro modo iría al relleno sanitario.</dd>
+        <dt>TIR</dt><dd>El interés anual equivalente que paga el proyecto sobre lo invertido.</dd>
+        <dt>VAN</dt><dd>Cuánto valor crea o destruye el proyecto, en pesos de hoy, frente a una alternativa que rinde lo que exiges.</dd>
+        <dt>Ley 1715</dt><dd>Beneficios tributarios para energías renovables: descontar hasta el 50 % de la inversión de la renta y depreciar más rápido.</dd>
+      </dl>
+    </details>
+  </section>
+</main>
+
+<aside class="panel" aria-label="Simulador">
+  <h2>Prueba otros supuestos</h2>
+  <p>Toda la página se actualiza al mover los controles.</p>
+  <div class="scen" role="group" aria-label="Escenarios">
+    <button data-s="pes" aria-pressed="false">Pesimista</button>
+    <button data-s="base" aria-pressed="true">Base</button>
+    <button data-s="opt" aria-pressed="false">Optimista</button>
+  </div>
+  <div class="ctl"><label for="s-gf">Cobro por tonelada recibida <b id="v-gf"></b></label><input type="range" id="s-gf" min="0" max="200000" step="5000"></div>
+  <div class="ctl"><label for="s-pel">Precio de la electricidad <b id="v-pel"></b></label><input type="range" id="s-pel" min="150" max="700" step="10"></div>
+  <div class="ctl"><label for="s-cu">Costo de la planta <b id="v-cu"></b></label><input type="range" id="s-cu" min="150" max="500" step="10"></div>
+  <div class="ctl"><label for="s-wacc">Rentabilidad que exiges <b id="v-wacc"></b></label><input type="range" id="s-wacc" min="6" max="20" step="0.5"></div>
+  <div class="out" aria-live="polite">
+    <div>Recupera en<b id="o-pb"></b></div>
+    <div>Rentabilidad anual<b id="o-irr"></b></div>
+  </div>
+  <details>
+    <summary>Más supuestos</summary>
+    <label class="sw"><input type="checkbox" id="s-co2"> Vender bonos de carbono</label>
+    <label class="sw"><input type="checkbox" id="s-ded"> Usar beneficios de la Ley 1715</label>
+    <div id="adv"></div>
+  </details>
+  <button class="reset" id="reset">Volver al escenario base</button>
+</aside>
+</div>
+
+<footer>
+  <p>Estudio de prefactibilidad con datos de noviembre de 2026: dólar a 3.183 pesos; contratos de electricidad del mercado regulado cerca de 332 pesos por kWh (XM, agosto de 2026); cobro por tonelada referido al costo del relleno sanitario (Resolución CRA 720 de 2015); beneficios de la Ley 1715 de 2014 y la Ley 2099 de 2021. Proyecto a 20 años, en pesos corrientes y sin deuda. Antes de decidir hay que confirmar el gas que produce el residuo real, el cobro por tonelada y el costo de la planta. No es asesoría financiera ni tributaria.</p>
+</footer>
+
+<script>
+const BASE={t:30000,st:.22,sv:.88,bmp:420,ch4:.60,pci:9.97,pe:.40,pt:.42,hrs:8000,aut:.10,fla:.03,
+ trm:3183,pel:300,gf:45000,dfr:.20,pdig:25000,cv:0,pcal:120,co2f:.5,pco2:20000,co2on:1,escp:.04,escc:.05,
+ cu:300,ovk:250,ovy:8,npers:14,cpers:60000000,mchp:55,mgen:.015,rech:.08,crech:55000,dliq:12000,quim:4000,seg:.006,adm:300000000,
+ wacc:.13,tax:.35,dep:5,ded:1,dedy:15};
+const SCEN={base:{},pes:{gf:30000,pel:250,cu:400,bmp:380,co2on:0},opt:{gf:120000,pel:400,cu:250,bmp:460,co2on:1}};
+const ADV=[["bmp","Gas del residuo (m³ CH₄/t SV)",1],["t","Residuo tratado (t/año)",1],["st","Sólidos totales (%)",100],
+ ["pe","Eficiencia del motor (%)",100],["trm","Dólar (COP)",1],["pdig","Precio del abono (COP/t)",1],["pco2","Bono de carbono (COP/t CO₂)",1],
+ ["npers","Personal (personas)",1],["dliq","Digestato líquido (COP/t)",1],["escp","Alza de precios (%/año)",100],["escc","Alza de costos (%/año)",100],["tax","Impuesto de renta (%)",100]];
+const MIX=[
+ {id:"fog",n:"Grasas de trampa",d:"10 % de la mezcla. Restaurantes, hoteles e industria pagan por entregarlas.",sh:.10,c:.30*.95*800,gf:100000},
+ {id:"pan",n:"Panadería y vencidos",d:"15 % de la mezcla. Supermercados pagan por su destrucción certificada.",sh:.15,c:.85*.95*430,gf:80000},
+ {id:"mat",n:"Residuos de matadero",d:"10 % de la mezcla. Vísceras y sangre; exigen higienizar a 70 °C.",sh:.10,c:.20*.85*600,gf:90000},
+ {id:"gli",n:"Glicerina cruda",d:"5 % de la mezcla. Del biodiésel de palma; da gas, pero nadie paga por ella.",sh:.05,c:.85*.85*450,gf:0}];
+BASE.mix=[];
+let P={...BASE,mix:[]}; const HZ=20;
+function applyMix(p){if(!p.mix||!p.mix.length)return p;const sel=MIX.filter(m=>p.mix.includes(m.id)),food=1-sel.reduce((a,m)=>a+m.sh,0),k=p.st*p.sv;
+ return {...p,mix:[],bmp:(food*k*p.bmp+sel.reduce((a,m)=>a+m.sh*m.c,0))/k,gf:food*p.gf+sel.reduce((a,m)=>a+m.sh*m.gf,0)};}
+
+function model(p){p=applyMix(p);const r={};
+ r.tsv=p.t*p.st*p.sv;r.nch4=r.tsv*p.bmp*(1-p.fla);r.nbg=p.ch4>0?r.nch4/p.ch4:0;r.ep=r.nch4*p.pci/1000;r.eb=r.ep*p.pe;
+ r.kw=p.hrs>0?r.eb*1000/p.hrs:0;r.en=r.eb*(1-p.aut);r.cal=r.ep*p.pt;r.capex=p.t*p.cu*p.trm;r.ovc=r.kw*p.ovk*p.trm;
+ const M=1e6,Y=[];let pool=r.capex*.5*p.ded,nol=0;
+ for(let y=1;y<=HZ;y++){const fp=Math.pow(1+p.escp,y-1),fc=Math.pow(1+p.escc,y-1),o={y};
+  o.el=r.en*1000*p.pel*fp/M;o.gf=p.t*p.gf*fp/M;o.dg=p.t*p.dfr*p.pdig*fp/M;o.ca=r.cal*1000*p.cv*p.pcal*fp/M;o.co=p.t*p.co2f*p.pco2*p.co2on*fp/M;
+  o.ing=o.el+o.gf+o.dg+o.ca+o.co;
+  o.pe=p.npers*p.cpers*fc/M;o.ch=r.eb*1000*p.mchp*fc/M;o.mg=r.capex*p.mgen*fc/M;o.re=p.t*p.rech*p.crech*fc/M;
+  o.dl=p.t*p.dliq*fc/M;o.qu=p.t*p.quim*fc/M;o.se=r.capex*p.seg*fc/M;o.ad=p.adm*fc/M;
+  o.opex=o.pe+o.ch+o.mg+o.re+o.dl+o.qu+o.se+o.ad;o.ebitda=o.ing-o.opex;
+  o.ovh=(p.ovy>0&&y%p.ovy===0&&y<HZ)?r.ovc*fc/M:0;o.dep=(y<=p.dep&&p.dep>0)?r.capex/M/p.dep:0;o.ebit=o.ebitda-o.dep;
+  o.dedu=y<=p.dedy?Math.min(pool/M,.5*Math.max(o.ebit,0)):0;pool-=o.dedu*M;
+  const pre=o.ebit-o.dedu,nu=Math.min(nol,Math.max(pre,0));nol=nol-nu+Math.max(-pre,0);
+  o.tax=(Math.max(pre,0)-nu)*p.tax;o.fcf=o.ebitda-o.tax-o.ovh;Y.push(o);}
+ r.Y=Y;r.cf=[-r.capex/M,...Y.map(o=>o.fcf)];let a=0;r.acc=r.cf.map(v=>a+=v);
+ r.npv=r.cf.reduce((s,v,i)=>s+v/Math.pow(1+p.wacc,i),0);r.irr=irr(r.cf);
+ const n=r.acc.slice(1).filter(v=>v<0).length;r.pb=n>=HZ?null:n+1;return r;}
+function irr(cf){const f=x=>cf.reduce((s,v,i)=>s+v/Math.pow(1+x,i),0);let lo=-.95,hi=1.5,flo=f(lo);if(flo*f(hi)>0)return null;
+ for(let i=0;i<120;i++){const m=(lo+hi)/2,fm=f(m);if(flo*fm<=0)hi=m;else{lo=m;flo=fm}}return(lo+hi)/2;}
+function solve(k,lo,hi,inc){const g=v=>model({...P,[k]:v}).npv;if(g(lo)*g(hi)>0)return null;
+ for(let i=0;i<60;i++){const m=(lo+hi)/2;if((g(m)>0)===inc)hi=m;else lo=m;}return(lo+hi)/2;}
+
+const nf=(v,d=0)=>v.toLocaleString("es-CO",{maximumFractionDigits:d,minimumFractionDigits:d});
+const $p=v=>"$"+nf(Math.round(v));
+const money=m=>{const s=m<0?"−":"",a=Math.abs(m);return a>=1000?s+"$"+nf(a/1000,1)+" mil millones":s+"$"+nf(a)+" millones";};
+const pct=v=>v===null?"—":nf(v*100,1)+" %";
+const $=id=>document.getElementById(id);
+
+// Panel
+const SL={gf:["s-gf",1,v=>$p(v)+"/t"],pel:["s-pel",1,v=>"$"+nf(v)+"/kWh"],cu:["s-cu",1,v=>"US$"+nf(v)+" por t/año"],wacc:["s-wacc",100,v=>nf(v,1)+" %"]};
+$("adv").innerHTML=ADV.map(([k,l])=>`<div class="f"><label for="a-${k}">${l}</label><input id="a-${k}" type="number"></div>`).join("");
+function sync(){Object.entries(SL).forEach(([k,[id,f,fm]])=>{$(id).value=P[k]*f;$("v-"+k).textContent=fm(P[k]*f);});
+ $("s-co2").checked=!!P.co2on;$("s-ded").checked=!!P.ded;ADV.forEach(([k,,f])=>$("a-"+k).value=+(P[k]*f).toFixed(4));}
+const press=s=>document.querySelectorAll(".scen button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.s===s));
+function scen(s){P={...BASE,...SCEN[s],mix:[]};press(s);sync();render();}
+document.querySelectorAll(".scen button").forEach(b=>b.onclick=()=>scen(b.dataset.s));
+$("reset").onclick=()=>scen("base");
+Object.entries(SL).forEach(([k,[id,f,fm]])=>$(id).addEventListener("input",e=>{P[k]=+e.target.value/f;$("v-"+k).textContent=fm(+e.target.value);press("");render();}));
+$("s-co2").onchange=e=>{P.co2on=e.target.checked?1:0;press("");render();};
+$("s-ded").onchange=e=>{P.ded=e.target.checked?1:0;press("");render();};
+ADV.forEach(([k,,f])=>$("a-"+k).addEventListener("input",e=>{const v=parseFloat(e.target.value);if(isFinite(v)){P[k]=v/f;press("");render();}}));
+
+$("chips").innerHTML=MIX.map(m=>`<button class="chip" data-m="${m.id}" aria-pressed="false"><b>${m.n}</b><span>${m.d}</span></button>`).join("");
+document.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{const id=b.dataset.m,on=P.mix.includes(id);P={...P,mix:on?P.mix.filter(x=>x!==id):[...P.mix,id]};render();});
+const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
+function tween(el,to,fmt){if(!el)return;const from=(el._v===undefined||RM||!isFinite(to))?to:el._v;el._v=to;if(from===to||!isFinite(from)){el.textContent=fmt(to);return;}
+ const t0=performance.now(),d=600;cancelAnimationFrame(el._r);const f=t=>{const k=Math.min((t-t0)/d,1),e=1-Math.pow(1-k,4);el.textContent=fmt(from+(to-from)*e);if(k<1)el._r=requestAnimationFrame(f);};el._r=requestAnimationFrame(f);}
+const ICON={good:`<svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="#DDEFD9"/><path d="M10 17.5l4.5 4.5L24 12.5" stroke="#2F7A3A" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+ mid:`<svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="#FAEFD3"/><path d="M17 9v10" stroke="#C98A0B" stroke-width="3" stroke-linecap="round"/><circle cx="17" cy="24.5" r="2" fill="#C98A0B"/></svg>`,
+ bad:`<svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="#F6DEE1"/><path d="M11.5 11.5l11 11M22.5 11.5l-11 11" stroke="#A3303D" stroke-width="3" stroke-linecap="round"/></svg>`};
+
+function chartSVG(r){const W=700,H=300,L=78,R=14,T=26,B=36,n=r.acc.length,vals=[...r.acc,0],mx=Math.max(...vals,0),mn=Math.min(...vals);
+ const y=v=>T+(mx-v)/((mx-mn)||1)*(H-T-B),x=i=>L+i*(W-L-R)/(n-1),st=nice((mx-mn)/5);let g="";
+ for(let v=Math.ceil(mn/st)*st;v<=mx+1e-9;v+=st){g+=`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="#DCE3DB"/><text x="${L-10}" y="${y(v)+4}" text-anchor="end" font-size="12" fill="#8A968E">${v===0?"0":nf(v/1000,0)+" mil M"}</text>`;}
+ const pts=r.acc.map((v,i)=>`${x(i)},${y(v)}`).join(" ");
+ g+=`<clipPath id="up"><rect x="0" y="0" width="${W}" height="${y(0)}"/></clipPath><clipPath id="dn"><rect x="0" y="${y(0)}" width="${W}" height="${H}"/></clipPath>`;
+ g+=`<polygon clip-path="url(#dn)" points="${x(0)},${y(0)} ${pts} ${x(n-1)},${y(0)}" fill="#F6DEE1"/><polygon clip-path="url(#up)" points="${x(0)},${y(0)} ${pts} ${x(n-1)},${y(0)}" fill="#DDEFD9"/>`;
+ g+=`<line x1="${L}" x2="${W-R}" y1="${y(0)}" y2="${y(0)}" stroke="#1E2520" stroke-width="1.5"/><polyline points="${pts}" fill="none" stroke="#1E2520" stroke-width="3" stroke-linejoin="round"/>`;
+ for(let i=0;i<n;i+=2)g+=`<text x="${x(i)}" y="${H-B+20}" text-anchor="${i===n-1?"end":"middle"}" font-size="12" fill="#8A968E">${i===0?"Hoy":"Año "+i}</text>`;
+ g+=`<circle cx="${x(0)}" cy="${y(r.acc[0])}" r="5" fill="#A3303D"/><text x="${x(0)+12}" y="${y(r.acc[0])+4}" font-size="13" font-weight="700" fill="#A3303D">Inversión: ${money(-r.acc[0])}</text>`;
+ if(r.pb){const i=r.pb,e=i>13;g+=`<line x1="${x(i)}" x2="${x(i)}" y1="${T-6}" y2="${H-B}" stroke="#2F7A3A" stroke-width="2" stroke-dasharray="4 4"/><text x="${x(i)+(e?-8:8)}" y="${T+6}" text-anchor="${e?"end":"start"}" font-size="13" font-weight="700" fill="#2F7A3A">Año ${i}: se recupera</text>`;}
+ else g+=`<text x="${W-R}" y="${T+6}" text-anchor="end" font-size="13" font-weight="700" fill="#A3303D">No se recupera en 20 años</text>`;
+ return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Dinero acumulado del proyecto durante 20 años">${g}</svg>`;}
+function nice(x){const e=Math.pow(10,Math.floor(Math.log10(Math.abs(x)||1))),f=x/e;return(f<1.5?1:f<3?2:f<7?5:10)*e;}
+
+function render(){
+ const r=model(P),y=r.Y[0],t=P.t,w=P.wacc,pt=v=>v*1e6/t,iv=r.irr===null?-1:r.irr;
+ // veredicto
+ let k,h,s;
+ if(r.npv>0){k="good";h="Sí es buen negocio con estos supuestos.";s=`Rinde ${pct(r.irr)} al año, más que el ${pct(w)} que exiges, y recupera la inversión en ${r.pb} años.`;}
+ else if(iv>0){k="mid";h="Gana dinero, pero no lo suficiente.";s=`Rinde ${pct(r.irr)} al año frente al ${pct(w)} que exiges${r.pb?`, y tarda ${r.pb} años en recuperar la inversión`:""}.`;}
+ else{k="bad";h="No recupera lo invertido.";s="En 20 años la operación no alcanza a pagar la construcción.";}
+ $("verdict").innerHTML=ICON[k]+`<div><b>${h}</b><span>${s}</span></div>`;
+ // recibo
+ const IN=[["Electricidad",y.el],["Cobro por recibir el residuo",y.gf],["Abono",y.dg],["Bonos de carbono",y.co],["Calor",y.ca]].filter(a=>a[1]>1e-4);
+ $("r-in").innerHTML=IN.map(([l,v])=>`<div class="rl"><span>${l}</span><span>${$p(pt(v))}</span></div>`).join("");
+ $("r-out").textContent="−"+$p(pt(y.opex));
+ const net=pt(y.ebitda),cap=r.capex/t;tween($("r-net"),net,v=>(v<0?"−":"")+$p(Math.abs(v)));$("r-net").className=net>=0?"pos":"neg";
+ $("r-note").innerHTML=net>0?`La planta cuesta ${$p(cap)} por tonelada de capacidad: se necesitan <b>${nf(cap/net,1)} años</b> de este margen solo para pagarla.`:`Cada tonelada cuesta más de lo que deja.`;
+ // proceso + fuentes
+ const E=applyMix(P);
+ $("st1").textContent=nf(P.t)+" t/año";$("st2").textContent=nf(r.tsv)+" t de materia útil";$("st3").textContent=nf(r.nbg/1e6,1)+" millones de m³";
+ $("st4").textContent=nf(r.kw/1000,1)+" MW";$("st5").textContent=nf(r.en)+" MWh/año";$("st5s").textContent="Alcanza para unos "+nf(Math.round(r.en*1000/12/180/100)*100)+" hogares.";
+ $("cap-abono").innerHTML=`<b>Lo que sobra es abono.</b> Unas ${nf(P.t*P.dfr)} toneladas al año de fertilizante para el campo.`;
+ document.querySelectorAll(".chip").forEach(b=>b.setAttribute("aria-pressed",P.mix.includes(b.dataset.m)));
+ const r0=model({...P,mix:[]});
+ const fpb=v=>v?Math.round(v)+" años":"+20 años";
+ $("g-pb2").innerHTML=fpb(r.pb)+(P.mix.length?`<s>${fpb(r0.pb)}</s>`:"");
+ $("g-irr2").innerHTML=pct(r.irr)+(P.mix.length?`<s>${pct(r0.irr)}</s>`:"");
+ const S=[["Electricidad",y.el],["Cobro por recibir residuo",y.gf],["Abono",y.dg],["Bonos de carbono",y.co]];
+ $("share").innerHTML=S.map(([l,v])=>`<span>${l}</span><span class="v">${money(v)} (${pct(y.ing?v/y.ing:0)})</span><span class="bar"><i style="width:${y.ing?v/y.ing*100:0}%"></i></span>`).join("");
+ // costos
+ $("cost").innerHTML=`Construirla cuesta <b>${money(r.capex/1e6)}</b> (US$${nf(r.capex/P.trm/1e6,1)} millones), una sola vez. Operarla cuesta <b>${money(y.opex)}</b> al año. Como entran ${money(y.ing)}, quedan <b class="${y.ebitda>=0?"pos":"neg"}">${money(y.ebitda)}</b> al año para devolver la inversión.`;
+ const O=[["Personal",y.pe],["Mantenimiento",y.ch+y.mg],["Digestato y rechazos",y.dl+y.re],["Administración",y.ad],["Seguros e insumos",y.se+y.qu]];
+ const C=["#1E2520","#4E5B53","#8A968E","#B9C4BC","#DCE3DB"];
+ $("stack").innerHTML=O.map(([,v],i)=>`<i style="width:${v/y.opex*100}%;background:${C[i]}"></i>`).join("");
+ $("keys").innerHTML=O.map(([l,v],i)=>`<span><b style="background:${C[i]}"></b>${l} ${pct(v/y.opex)}</span>`).join("");
+ // métricas
+ const ok=r.pb&&r.pb<=10;$("m-pb").textContent=r.pb?r.pb+" años":"+20 años";$("m-pb").className="big "+(ok?"pos":"neg");
+ $("t-pb").textContent=r.pb?`Sumando lo que deja cada año, el dinero vuelve en el año ${r.pb}.${ok?"":" Es un plazo largo para este tipo de proyecto."}`:"No se recupera en los 20 años de vida de la planta.";
+ $("g-pb").style.width=Math.min((r.pb||20)/20*100,100)+"%";$("g-pb").style.background=ok?"var(--leaf)":"var(--loss)";
+ tween($("m-irr"),r.irr===null?NaN:r.irr,v=>isFinite(v)?pct(v):"—");$("m-irr").className="big "+(iv>=w?"pos":"neg");
+ $("t-irr").textContent=iv>0?`Cada $100 invertidos rinden ${nf(r.irr*100,1)} pesos al año. Tú exiges ${pct(w)}.`:"El proyecto devuelve menos de lo que se invierte.";
+ $("g-irr").style.width=Math.max(0,Math.min(iv/.25*100,100))+"%";$("g-irr").style.background=iv>=w?"var(--leaf)":"var(--sun)";
+ $("g-w").style.left=Math.min(w/.25*100,100)+"%";$("g-wl").textContent="Tu exigencia: "+pct(w);
+ tween($("m-npv"),r.npv,v=>(v<0?"−":"+")+"$"+nf(Math.abs(v)/1000,1)+" mil M");$("m-npv").className="big sm "+(r.npv>=0?"pos":"neg");
+ $("t-npv").innerHTML=r.npv>=0?`Frente a una inversión que rinda ${pct(w)}, este proyecto te deja <b>${money(r.npv)} más</b> en pesos de hoy.`:`Frente a una inversión que rinda ${pct(w)}, este proyecto te deja <b>${money(-r.npv)} menos</b> en pesos de hoy.`;
+ $("chart").innerHTML=chartSVG(r);
+ // umbrales
+ const bg=solve("gf",0,600000,true),bp=solve("pel",0,3000,true),bc=solve("cu",10,1500,false);
+ const line=(lab,val,cur,ok,more)=>`<li><span>${lab}</span><span class="d ${ok?"pos":""}">${val}</span><small>${ok?"El supuesto actual ya lo cumple.":more}</small></li>`;
+ $("need").innerHTML=
+  line("Cobro mínimo por tonelada",bg===null?"No alcanza":$p(bg),P.gf,bg!==null&&bg<=P.gf,bg===null?"Ni cobrando muy alto se llega.":`Hoy suponemos ${$p(P.gf)}: faltan ${$p(bg-P.gf)} por tonelada.`)+
+  line("Precio mínimo de la electricidad",bp===null?"No alcanza":"$"+nf(bp)+"/kWh",P.pel,bp!==null&&bp<=P.pel,bp===null?"Ningún precio razonable basta.":`Hoy suponemos $${nf(P.pel)}: sería ${nf((bp/P.pel-1)*100)} % más.`)+
+  line("Costo máximo de la planta",bc===null?"No alcanza":money(t*bc*P.trm/1e6),P.cu,bc!==null&&bc>=P.cu,bc===null?"Ni una planta casi gratis bastaría.":`Hoy suponemos ${money(r.capex/1e6)}: tendría que costar ${nf((1-bc/P.cu)*100)} % menos.`);
+ // tabla
+ const gs=[0,30000,45000,80000,120000,160000],ps=[250,300,400,500];
+ const ng=gs.reduce((a,b)=>Math.abs(b-P.gf)<Math.abs(a-P.gf)?b:a),np=ps.reduce((a,b)=>Math.abs(b-P.pel)<Math.abs(a-P.pel)?b:a);
+ let hh=`<table class="sens"><thead><tr><th scope="col">Cobro/t</th>${ps.map(p=>`<th scope="col">$${p}/kWh</th>`).join("")}</tr></thead><tbody>`;
+ gs.forEach(g=>{hh+=`<tr><th scope="row">${$p(g)}</th>`;ps.forEach(p=>{const q=model({...P,gf:g,pel:p}),c=q.npv>0?"g":(q.irr!==null&&q.irr>0?"y":"r");
+  hh+=`<td class="${c}${g===ng&&p===np?" now":""}">${q.irr===null||q.irr<-.5?"pierde":pct(q.irr)}</td>`;});hh+="</tr>";});
+ $("sens").innerHTML=hh+"</tbody></table>";
+ $("o-pb").textContent=r.pb?r.pb+" años":"+20 años";$("o-pb").className=ok?"pos":"neg";
+ tween($("o-irr"),r.irr===null?NaN:r.irr,v=>isFinite(v)?pct(v):"—");$("o-irr").className=iv>=w?"pos":"neg";
+}
+sync();render();
+// Recorrido: se enciende paso a paso al entrar en pantalla
+document.documentElement.classList.add("js");
+const tr=$("track"),st=[...tr.querySelectorAll(".step")];
+const go=()=>st.forEach((e,i)=>setTimeout(()=>{e.classList.add("on");tr.style.setProperty("--prog",((i+1)/st.length*100)+"%");},RM?0:i*260));
+if("IntersectionObserver"in window&&!RM){const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){go();io.disconnect();}},{threshold:.35});io.observe(tr);}else go();
+setTimeout(()=>{if(!st[0].classList.contains("on"))go();},6000);
+// Banner y recibo: un solo momento de entrada. Si no se ejecuta, todo queda visible.
+const hi=document.querySelector(".banner img");
+if(hi&&hi.animate&&!RM)hi.animate([{transform:"scale(1.12)"},{transform:"scale(1)"}],{duration:9000,easing:"cubic-bezier(.16,1,.3,1)"});
+const rc=document.querySelector(".receipt");
+if(rc&&rc.animate&&!RM)rc.animate([{clipPath:"inset(0 0 100% 0)",transform:"translateY(-12px)"},{clipPath:"inset(0 0 0 0)",transform:"none"}],{duration:1100,easing:"cubic-bezier(.16,1,.3,1)"});
+</script>
+</body>
+</html>

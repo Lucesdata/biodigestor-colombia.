@@ -2,11 +2,12 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Rentabilidad de una planta de biogás de 30.000 t/año en Colombia, explicada para inversionistas.">
 <meta property="og:title" content="¿Es buen negocio convertir restos de comida en electricidad?">
 <meta property="og:image" content="img/hero.webp">
 <link rel="preload" as="image" href="img/hero.webp">
+<meta name="theme-color" content="#1E2520">
 <title>¿Es buen negocio convertir restos de comida en electricidad?</title>
 <style>
 @font-face{font-family:'Bricolage';src:url(fonts/bricolage-grotesque-latin-500-normal.woff2) format('woff2');font-weight:500;font-display:swap}@font-face{font-family:'Bricolage';src:url(fonts/bricolage-grotesque-latin-600-normal.woff2) format('woff2');font-weight:600;font-display:swap}@font-face{font-family:'Bricolage';src:url(fonts/bricolage-grotesque-latin-700-normal.woff2) format('woff2');font-weight:700;font-display:swap}@font-face{font-family:'Bricolage';src:url(fonts/bricolage-grotesque-latin-800-normal.woff2) format('woff2');font-weight:800;font-display:swap}@font-face{font-family:'Literata';src:url(fonts/literata-latin-400-normal.woff2) format('woff2');font-weight:400;font-display:swap}@font-face{font-family:'Literata';src:url(fonts/literata-latin-700-normal.woff2) format('woff2');font-weight:700;font-display:swap}
@@ -196,6 +197,60 @@ input[type=range]{width:100%;margin:8px 0 0;accent-color:var(--sun)}
 .gain s{color:var(--ink3);font:600 15px var(--display);margin-left:6px}
 .note{font-size:13.5px;color:var(--ink3);margin-top:10px}
 
+/* ===== Celular ===== */
+.mbar,.sheet-bg,.sheet-head{display:none}
+@media(max-width:980px){
+  body{font-size:16px;padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+  .banner{height:auto;min-height:78svh}
+  .banner .copy{min-height:78svh;padding:0 20px 36px}
+  .banner h1{font-size:clamp(32px,9vw,46px)}
+  .banner .lede{font-size:17px}
+  .hero{gap:22px;padding:0 18px 8px}
+  .hero .left{padding-top:22px}
+  .verdict b{font-size:19px}
+  .receipt{padding:20px 20px 34px}
+  .rt span:last-child{font-size:28px}
+  .steps{padding:40px 18px 4px}
+  .track{--imgh:150px;grid-auto-columns:74%;gap:14px;margin-right:-18px;padding-right:18px}
+  .story section{padding:36px 0 4px}
+  .m{padding:18px 0}
+  .m .big{font-size:34px}.m .big.sm{font-size:28px}
+  .need li{grid-template-columns:1fr}
+  .need .d{font-size:21px}
+  .tablewrap{overflow-x:auto;margin:0 -18px;padding:0 18px}
+  table.sens{min-width:420px}
+  dl{grid-template-columns:1fr}
+
+  /* Resumen fijo abajo */
+  .mbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:40;gap:12px;align-items:center;justify-content:space-between;
+    background:var(--ink);color:#E9EEE8;padding:10px 14px calc(10px + env(safe-area-inset-bottom)) 18px;box-shadow:0 -10px 30px -12px rgba(0,0,0,.45)}
+  .mbar .k{display:flex;gap:18px}
+  .mbar .k div{font-size:11.5px;color:#A9B6AD;line-height:1.2}
+  .mbar .k b{display:block;font:700 19px var(--display);color:#fff}
+  .mbar .k b.pos{color:#9ED69A}.mbar .k b.neg{color:#F0959F}
+  .mbar button{font:700 15px var(--display);background:var(--sun);color:var(--ink);border:0;border-radius:12px;padding:12px 16px;min-height:46px;cursor:pointer;white-space:nowrap}
+
+  /* Simulador como hoja deslizable */
+  aside.panel{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:60;margin:0;border-radius:20px 20px 0 0;max-height:86svh;overflow:auto;overscroll-behavior:contain;
+    padding:8px 20px calc(22px + env(safe-area-inset-bottom));transform:translateY(105%);transition:transform .45s cubic-bezier(.16,1,.3,1);visibility:hidden}
+  aside.panel.open{transform:none;visibility:visible}
+  .sheet-head{display:flex;justify-content:space-between;align-items:center;position:sticky;top:-8px;background:var(--ink);padding:10px 0 6px;z-index:1}
+  .sheet-head::before{content:"";position:absolute;left:50%;top:2px;width:42px;height:5px;border-radius:9px;background:#45524A;transform:translateX(-50%)}
+  .sheet-head button{font:600 15px var(--display);background:none;border:1.5px solid #45524A;color:#E9EEE8;border-radius:10px;padding:8px 14px;min-height:42px}
+  .panel h2{margin-top:8px}
+  .sheet-bg{display:block;position:fixed;inset:0;z-index:55;background:rgba(16,22,18,.5);opacity:0;pointer-events:none;transition:opacity .3s}
+  .sheet-bg.open{opacity:1;pointer-events:auto}
+  .scen button{min-height:44px;font-size:15px}
+  .ctl{margin-bottom:22px}
+  .ctl label{font-size:15.5px}
+  input[type=range]{height:34px}
+  .out{display:none}
+  .f input{min-height:38px;font-size:16px}
+  .sw{font-size:15px}.sw input{width:22px;height:22px}
+  .chip{padding:14px 14px 14px 46px}
+}
+@media (prefers-reduced-motion:reduce){.panel{transition:none}}
+
 footer{max-width:1200px;margin:0 auto;padding:24px 28px 48px;border-top:1px solid var(--line);font-size:13.5px;color:var(--ink2)}
 footer p{max-width:100ch}
 
@@ -299,7 +354,7 @@ footer p{max-width:100ch}
     <details>
       <summary>Ver la tabla de combinaciones</summary>
       <p class="muted" style="font-size:14.5px;margin-top:6px">Rentabilidad anual según el cobro por tonelada (filas) y el precio de la electricidad (columnas). Verde: supera tu exigencia. Ámbar: gana, pero menos. Rojo: pierde. El recuadro marca tu escenario.</p>
-      <div id="sens"></div>
+      <div class="tablewrap"><div id="sens"></div></div>
     </details>
   </section>
 
@@ -340,7 +395,9 @@ footer p{max-width:100ch}
   </section>
 </main>
 
-<aside class="panel" aria-label="Simulador">
+<div class="sheet-bg" id="sheetbg"></div>
+<aside class="panel" id="panel" aria-label="Simulador">
+  <div class="sheet-head"><span></span><button id="close" type="button">Listo</button></div>
   <h2>Prueba otros supuestos</h2>
   <p>Toda la página se actualiza al mover los controles.</p>
   <div class="scen" role="group" aria-label="Escenarios">
@@ -364,6 +421,10 @@ footer p{max-width:100ch}
   </details>
   <button class="reset" id="reset">Volver al escenario base</button>
 </aside>
+</div>
+<div class="mbar" role="region" aria-label="Resumen del escenario">
+  <div class="k"><div>Recupera en<b id="b-pb"></b></div><div>Rentabilidad<b id="b-irr"></b></div></div>
+  <button id="open" type="button" aria-controls="panel" aria-expanded="false">Cambiar supuestos</button>
 </div>
 
 <footer>
@@ -440,17 +501,18 @@ const ICON={good:`<svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy
  mid:`<svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="#FAEFD3"/><path d="M17 9v10" stroke="#C98A0B" stroke-width="3" stroke-linecap="round"/><circle cx="17" cy="24.5" r="2" fill="#C98A0B"/></svg>`,
  bad:`<svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="#F6DEE1"/><path d="M11.5 11.5l11 11M22.5 11.5l-11 11" stroke="#A3303D" stroke-width="3" stroke-linecap="round"/></svg>`};
 
-function chartSVG(r){const W=700,H=300,L=78,R=14,T=26,B=36,n=r.acc.length,vals=[...r.acc,0],mx=Math.max(...vals,0),mn=Math.min(...vals);
+function chartSVG(r){const cw=($("chart").clientWidth||700),sm=cw<560,W=sm?Math.max(330,cw):700,H=sm?260:300,L=sm?56:78,R=sm?10:14,T=26,B=36,fs=sm?11.5:12,step=sm?5:2,n=r.acc.length,vals=[...r.acc,0],mx=Math.max(...vals,0),mn=Math.min(...vals);
  const y=v=>T+(mx-v)/((mx-mn)||1)*(H-T-B),x=i=>L+i*(W-L-R)/(n-1),st=nice((mx-mn)/5);let g="";
- for(let v=Math.ceil(mn/st)*st;v<=mx+1e-9;v+=st){g+=`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="#DCE3DB"/><text x="${L-10}" y="${y(v)+4}" text-anchor="end" font-size="12" fill="#8A968E">${v===0?"0":nf(v/1000,0)+" mil M"}</text>`;}
+ for(let v=Math.ceil(mn/st)*st;v<=mx+1e-9;v+=st){g+=`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="#DCE3DB"/><text x="${L-10}" y="${y(v)+4}" text-anchor="end" font-size="${fs}" fill="#8A968E">${v===0?"0":nf(v/1000,0)+(sm?"":" mil M")}</text>`;}
  const pts=r.acc.map((v,i)=>`${x(i)},${y(v)}`).join(" ");
  g+=`<clipPath id="up"><rect x="0" y="0" width="${W}" height="${y(0)}"/></clipPath><clipPath id="dn"><rect x="0" y="${y(0)}" width="${W}" height="${H}"/></clipPath>`;
  g+=`<polygon clip-path="url(#dn)" points="${x(0)},${y(0)} ${pts} ${x(n-1)},${y(0)}" fill="#F6DEE1"/><polygon clip-path="url(#up)" points="${x(0)},${y(0)} ${pts} ${x(n-1)},${y(0)}" fill="#DDEFD9"/>`;
  g+=`<line x1="${L}" x2="${W-R}" y1="${y(0)}" y2="${y(0)}" stroke="#1E2520" stroke-width="1.5"/><polyline points="${pts}" fill="none" stroke="#1E2520" stroke-width="3" stroke-linejoin="round"/>`;
- for(let i=0;i<n;i+=2)g+=`<text x="${x(i)}" y="${H-B+20}" text-anchor="${i===n-1?"end":"middle"}" font-size="12" fill="#8A968E">${i===0?"Hoy":"Año "+i}</text>`;
- g+=`<circle cx="${x(0)}" cy="${y(r.acc[0])}" r="5" fill="#A3303D"/><text x="${x(0)+12}" y="${y(r.acc[0])+4}" font-size="13" font-weight="700" fill="#A3303D">Inversión: ${money(-r.acc[0])}</text>`;
+ for(let i=0;i<n;i+=step)g+=`<text x="${x(i)}" y="${H-B+20}" text-anchor="${i===n-1?"end":"middle"}" font-size="${fs}" fill="#8A968E">${i===0?"Hoy":"Año "+i}</text>`;
+ g+=`<circle cx="${x(0)}" cy="${y(r.acc[0])}" r="5" fill="#A3303D"/><text x="${x(0)+12}" y="${y(r.acc[0])+4}" font-size="${sm?12:13}" font-weight="700" fill="#A3303D">${sm?"":"Inversión: "}${money(-r.acc[0])}</text>`;
  if(r.pb){const i=r.pb,e=i>13;g+=`<line x1="${x(i)}" x2="${x(i)}" y1="${T-6}" y2="${H-B}" stroke="#2F7A3A" stroke-width="2" stroke-dasharray="4 4"/><text x="${x(i)+(e?-8:8)}" y="${T+6}" text-anchor="${e?"end":"start"}" font-size="13" font-weight="700" fill="#2F7A3A">Año ${i}: se recupera</text>`;}
  else g+=`<text x="${W-R}" y="${T+6}" text-anchor="end" font-size="13" font-weight="700" fill="#A3303D">No se recupera en 20 años</text>`;
+ if(sm)g+=`<text x="${L}" y="12" font-size="11" fill="#8A968E">mil millones de pesos</text>`;
  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Dinero acumulado del proyecto durante 20 años">${g}</svg>`;}
 function nice(x){const e=Math.pow(10,Math.floor(Math.log10(Math.abs(x)||1))),f=x/e;return(f<1.5?1:f<3?2:f<7?5:10)*e;}
 
@@ -511,10 +573,16 @@ function render(){
  gs.forEach(g=>{hh+=`<tr><th scope="row">${$p(g)}</th>`;ps.forEach(p=>{const q=model({...P,gf:g,pel:p}),c=q.npv>0?"g":(q.irr!==null&&q.irr>0?"y":"r");
   hh+=`<td class="${c}${g===ng&&p===np?" now":""}">${q.irr===null||q.irr<-.5?"pierde":pct(q.irr)}</td>`;});hh+="</tr>";});
  $("sens").innerHTML=hh+"</tbody></table>";
- $("o-pb").textContent=r.pb?r.pb+" años":"+20 años";$("o-pb").className=ok?"pos":"neg";
+ $("o-pb").textContent=r.pb?r.pb+" años":"+20 años";$("b-pb").textContent=r.pb?r.pb+" años":"+20 años";$("b-pb").className=ok?"pos":"neg";$("b-irr").textContent=pct(r.irr);$("b-irr").className=iv>=w?"pos":"neg";$("o-pb").className=ok?"pos":"neg";
  tween($("o-irr"),r.irr===null?NaN:r.irr,v=>isFinite(v)?pct(v):"—");$("o-irr").className=iv>=w?"pos":"neg";
 }
 sync();render();
+// Hoja del simulador en celular
+const pn=$("panel"),bg=$("sheetbg"),ob=$("open");
+const sheet=o=>{pn.classList.toggle("open",o);bg.classList.toggle("open",o);ob.setAttribute("aria-expanded",o);document.body.style.overflow=o?"hidden":"";if(o)pn.querySelector(".scen button").focus();else ob.focus();};
+ob.onclick=()=>sheet(true);$("close").onclick=()=>sheet(false);bg.onclick=()=>sheet(false);
+addEventListener("keydown",e=>{if(e.key==="Escape"&&pn.classList.contains("open"))sheet(false);});
+let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{$("chart").innerHTML=chartSVG(model(P));if(innerWidth>980&&pn.classList.contains("open"))sheet(false);},150);});
 // Recorrido: se enciende paso a paso al entrar en pantalla
 document.documentElement.classList.add("js");
 const tr=$("track"),st=[...tr.querySelectorAll(".step")];
